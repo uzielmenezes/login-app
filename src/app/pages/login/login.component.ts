@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,9 +7,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 import { LoginLayoutComponent } from '../../components/login-layout/login-layout.component';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
+import { LoginService } from '../../services/login.service';
 
 interface LoginForm {
   email: FormControl;
@@ -20,13 +22,20 @@ interface LoginForm {
   selector: 'login',
   standalone: true,
   imports: [LoginLayoutComponent, ReactiveFormsModule, PrimaryInputComponent],
+  providers: [LoginService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  private readonly destroy$ = new Subject<void>();
+
   loginForm!: FormGroup<LoginForm>;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -35,8 +44,23 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   submit() {
-    console.log(this.loginForm.value);
+    this.loginService
+      .login(this.loginForm.value.email, this.loginForm.value.password)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          console.log('success');
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   navigate() {
