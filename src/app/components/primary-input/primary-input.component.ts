@@ -29,8 +29,8 @@ export class PrimaryInputComponent implements ControlValueAccessor {
 
   value: string = '';
 
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  private onChange: any = () => {};
+  private onTouched: any = () => {};
 
   onInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
