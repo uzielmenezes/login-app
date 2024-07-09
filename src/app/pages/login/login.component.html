@@ -1,7 +1,27 @@
 <login-layout
   title="Login into your account"
-  primaryBtnText="Login Now"
-  secondaryBtnText="Signup Now"
+  primaryBtnText="Login now"
+  secondaryBtnText="Sign up now"
+  (submit)="submit()"
+  (navigate)="navigate()"
 >
-  <form [formGroup]="loginForm"></form>
+  <form [formGroup]="loginForm">
+    <primary-input
+      formControlName="email"
+      inputName="email"
+      label="Email"
+      type="email"
+      placeholder="johndoe@live.com"
+    >
+      <img src="assets/svg/email-icon.svg" alt="" />
+    </primary-input>
+    <primary-input
+      formControlName="password"
+      inputName="password"
+      label="Your Password"
+      type="password"
+      ><img src="assets/svg/password-icon.svg" alt=""
+    /></primary-input>
+    <span>Forgot your password?</span>
+  </form>
 </login-layout>
