@@ -1,0 +1,44 @@
+<login-layout
+  title="Sign in and start today"
+  primaryBtnText="Sign up now"
+  secondaryBtnText="Login Now"
+  [disablePrimaryBtn]="!signupForm.valid"
+  (submit)="submit()"
+  (navigate)="navigate()"
+>
+  <form [formGroup]="signupForm">
+    <primary-input
+      formControlName="name"
+      inputName="name"
+      S
+      label="Name"
+      type="text"
+      placeholder="John Doe"
+    >
+      <img src="assets/svg/user-icon.svg" alt="User Icon" />
+    </primary-input>
+    <primary-input
+      formControlName="email"
+      inputName="email"
+      label="Email"
+      type="email"
+      placeholder="johndoe@live.com"
+    >
+      <img src="assets/svg/email-icon.svg" alt="Email envelop" />
+    </primary-input>
+    <primary-input
+      formControlName="password"
+      inputName="password"
+      label="Your Password"
+      type="password"
+      ><img src="assets/svg/password-icon.svg" alt="Password Locker"
+    /></primary-input>
+    <primary-input
+      formControlName="passwordConfirm"
+      inputName="passwordConfirm"
+      label="Confirm your Password"
+      type="password"
+      ><img src="assets/svg/password-icon.svg" alt="Password Locker"
+    /></primary-input>
+  </form>
+</login-layout>
