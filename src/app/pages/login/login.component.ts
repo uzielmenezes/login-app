@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 
 import { LoginLayoutComponent } from '../../components/login-layout/login-layout.component';
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private toastService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -55,9 +57,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          console.log('success');
+          this.toastService.success('Successfully logged in');
         },
         error: (err) => {
+          this.toastService.error('Unexpected error, try again later');
           console.log(err);
         },
       });
