@@ -14,10 +14,10 @@ import { LoginLayoutComponent } from '../../components/login-layout/login-layout
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { LoginService } from '../../services/login.service';
 
-interface LoginForm {
+type LoginForm = {
   email: FormControl;
   password: FormControl;
-}
+};
 
 @Component({
   selector: 'login',
