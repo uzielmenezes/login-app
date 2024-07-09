@@ -1,0 +1,32 @@
+@import "../../../styles/variables.scss";
+
+.input-wrapper {
+  color: $text-color;
+  font-size: 1.6rem;
+  text-align: start;
+
+  .input-content {
+    display: flex;
+    width: 100%;
+    border-radius: 0.8rem;
+
+    input {
+      border: none;
+      border-radius: 0.8rem 0 0 0.8rem;
+      background-color: $gray-secondary-bg;
+      padding: 1.2rem 0 1.2rem 2rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .icon {
+      border-radius: 0 0.8rem 0.8rem 0;
+      padding: 1.2rem;
+      background-color: $primary-color;
+
+      img {
+        height: 2rem;
+      }
+    }
+  }
+}
