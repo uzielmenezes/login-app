@@ -1,9 +1,9 @@
 <div class="input-wrapper">
-  <label [for]="inputName">{{ label }}</label>
+  <label [for]="inputName()">{{ label() }}</label>
   <div class="input-content">
     <input
-      [type]="type"
-      [placeholder]="placeholder"
+      [type]="type()"
+      [placeholder]="placeholder()"
       [value]="value"
       (input)="onInput($event)"
     />

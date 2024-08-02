@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, input } from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
@@ -22,10 +22,10 @@ type InputTypes = 'text' | 'email' | 'password';
   styleUrl: './primary-input.component.scss',
 })
 export class PrimaryInputComponent implements ControlValueAccessor {
-  @Input() inputName: string = '';
-  @Input() label: string = '';
-  @Input() type: InputTypes = 'text';
-  @Input() placeholder: string = '';
+  inputName = input<string>('');
+  label = input<string>('');
+  type = input<InputTypes>('text');
+  placeholder = input<string>('');
 
   value: string = '';
 
