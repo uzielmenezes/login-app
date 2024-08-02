@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 
+import { passwordMatchingValidator } from '../../../shared/validators/passMatchingValidator';
 import { LoginLayoutComponent } from '../../components/login-layout/login-layout.component';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { LoginService } from '../../services/login.service';
@@ -20,7 +21,6 @@ type SignupForm = {
   password: FormControl;
   passwordConfirm: FormControl;
 };
-
 @Component({
   selector: 'signup',
   standalone: true,
@@ -42,12 +42,15 @@ export class SignUpComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.signupForm = this.fb.group({
-      name: ['', [Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],
-    });
+    this.signupForm = this.fb.group(
+      {
+        name: ['', [Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        passwordConfirm: ['', [Validators.required]],
+      },
+      { validators: passwordMatchingValidator }
+    );
   }
 
   ngOnDestroy(): void {
@@ -60,13 +63,13 @@ export class SignUpComponent implements OnInit, OnDestroy {
       .signup(
         this.signupForm.value.name,
         this.signupForm.value.email,
-        this.signupForm.value.password,
-        this.signupForm.value.passwordConfirm
+        this.signupForm.value.password
       )
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
           this.toastService.success('Successfully signed in');
+          this.toUserPage();
         },
         error: (err) => {
           this.toastService.error('Unexpected error, try again later');
@@ -77,5 +80,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   navigate() {
     this.router.navigate(['/login']);
+  }
+
+  private toUserPage() {
+    this.router.navigate(['/user']);
   }
 }

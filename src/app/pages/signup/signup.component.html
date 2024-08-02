@@ -10,7 +10,6 @@
     <primary-input
       formControlName="name"
       inputName="name"
-      S
       label="Name"
       type="text"
       placeholder="John Doe"
@@ -40,5 +39,9 @@
       type="password"
       ><img src="assets/svg/password-icon.svg" alt="Password Locker"
     /></primary-input>
+    @if(signupForm.hasError('notmatched') &&
+    signupForm.get('passwordConfirm')?.dirty){
+    <p>Passwords do not match</p>
+    }
   </form>
 </login-layout>
