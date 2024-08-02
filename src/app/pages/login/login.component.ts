@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.toastService.success('Successfully logged in');
+          this.toUserPage();
         },
         error: (err) => {
           this.toastService.error('Unexpected error, try again later');
@@ -68,5 +69,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   navigate() {
     this.router.navigate(['/signup']);
+  }
+
+  private toUserPage() {
+    this.router.navigate(['/user']);
   }
 }
