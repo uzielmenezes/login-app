@@ -6,13 +6,14 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private toastService: ToastrService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -28,6 +29,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       this.router.navigate(['/login']);
+      this.toastService.error("You don't have access to this page");
       return false;
     }
   }
