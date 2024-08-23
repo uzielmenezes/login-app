@@ -1,16 +1,18 @@
+import { NgClass } from '@angular/common';
 import { Component, forwardRef, input } from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 
 type InputTypes = 'text' | 'email' | 'password';
 
 @Component({
   selector: 'primary-input',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputTextModule, NgClass],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

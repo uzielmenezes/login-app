@@ -2,6 +2,8 @@
   <label [for]="inputName()">{{ label() }}</label>
   <div class="input-content">
     <input
+      #textInput
+      pInputText
       [type]="type()"
       [placeholder]="placeholder()"
       [value]="value"
