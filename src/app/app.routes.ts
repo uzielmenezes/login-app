@@ -9,7 +9,8 @@ import { UserComponent } from './pages/user/user.component';
 export const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
+    pathMatch: 'full',
+    redirectTo: 'login',
   },
   {
     path: 'login',
