@@ -1,9 +1,10 @@
 import { Component, input, output } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'login-layout',
   standalone: true,
-  imports: [],
+  imports: [ButtonModule],
   templateUrl: './login-layout.component.html',
   styleUrl: './login-layout.component.scss',
 })

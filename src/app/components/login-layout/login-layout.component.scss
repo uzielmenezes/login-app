@@ -1,4 +1,5 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/prime_theme.scss";
 
 main {
   display: flex;
@@ -56,34 +57,6 @@ section {
         background-color: $gray-bg;
       }
     }
-
-    button {
-      width: 100%;
-      padding: 1.2rem 2.4rem;
-      border-radius: 0.8rem;
-      font-size: 1.6rem;
-      font-weight: 500;
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
-
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      &.btn-primary {
-        background-color: $primary-color;
-        color: #fff;
-        box-shadow: 0 0.8rem 1.2rem
-          rgba(148.23004603385925, 64.33935597538948, 255, 0.20000000298023224);
-      }
-
-      &.btn-secondary {
-        border: 0.1rem solid $primary-color;
-        color: $primary-color;
-      }
-    }
   }
 }
 
@@ -91,4 +64,17 @@ section {
   gap: 0.8rem;
   flex-grow: 1;
   background-color: $gray-bg;
+}
+
+:host ::ng-deep {
+  .btn-sign {
+    width: 100%;
+    .p-button {
+      padding: 2.1rem;
+      font-size: 1.8rem;
+      background-color: $primary-color;
+      box-shadow: 0 0.8rem 1.2rem
+        rgba(148.23004603385925, 64.33935597538948, 255, 0.20000000298023224);
+    }
+  }
 }
