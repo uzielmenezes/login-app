@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 
-import { LoginResponse, SignUpResponse } from '../types/login-response.type';
+import { LoginResponse } from '../types/login-response.type';
 
 const API_URL = `http://localhost:8080/auth`;
 
@@ -22,7 +22,7 @@ export class LoginService {
       .pipe(
         tap((value) => {
           sessionStorage.setItem('auth-token', value.token);
-          sessionStorage.setItem('username', value.email);
+          sessionStorage.setItem('username', value.name);
         })
       );
   }
@@ -31,9 +31,9 @@ export class LoginService {
     name: string,
     email: string,
     password: string
-  ): Observable<SignUpResponse> {
+  ): Observable<LoginResponse> {
     return this.http
-      .post<SignUpResponse>(this.SIGNUP_URL, {
+      .post<LoginResponse>(this.SIGNUP_URL, {
         name,
         email,
         password,
@@ -41,8 +41,7 @@ export class LoginService {
       .pipe(
         tap((value) => {
           sessionStorage.setItem('auth-token', value.token);
-          sessionStorage.setItem('username', value.email);
-          sessionStorage.setItem('login-name', value.name);
+          sessionStorage.setItem('username', value.name);
         })
       );
   }
